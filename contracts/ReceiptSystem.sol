@@ -12,15 +12,19 @@ contract ReceiptSystem{
         string time;
         
     }
-    event LogReceipt(uint Rid, string date, string time);
+    event LogReceipt(uint Rid, uint Cid, uint Sid, string date, string time);
     mapping(uint => Receipt) private Receipts;
     function insertReceipt(
         uint _Rid,
+        uint _Cid,
+        uint _Sid,
         string memory _RDate,
         string memory _Rtime)
         public {
             ReceiptCount++;
             Receipts[ReceiptCount].Rid = _Rid;
+            Receipts[ReceiptCount].Cid = _Cid;
+            Receipts[ReceiptCount].Sid = _Sid;
             Receipts[ReceiptCount].date = _RDate;
             Receipts[ReceiptCount].time = _Rtime;
             emit LogReceipt(_Rid, _RDate, _Rtime);
@@ -30,9 +34,11 @@ contract ReceiptSystem{
     )
     public 
     view
-    returns(uint _Rid, string memory _Rdate, string memory _Rtime){
+    returns(uint _Rid, uint _Cid, uint _Sid, string memory _Rdate, string memory _Rtime){
         return(
             Receipts[index].Rid,
+            Receipts[index].Cid,
+            Receipts[index].Sid,
             Receipts[index].date,
             Receipts[index].time);
         
@@ -45,7 +51,3 @@ contract ReceiptSystem{
     }
     
 }
-//let instance = await ReceiptSystem.deployed()
-//instance.insertReceipt(1,'2022-03-27','4:19PM')
-//instance.getReceiptCount()
-//instance.getReceipt(1)
