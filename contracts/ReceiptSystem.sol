@@ -5,12 +5,16 @@ contract ReceiptSystem{
     uint public ReceiptCount = 0;
     string public receiptmessage = "hello world";
     struct Receipt{
+        // uint Rid;
+        // uint Mid;
+        // uint Sid;
+        // uint cost;
+        // string datetime;
         uint Rid;
         uint Cid;
         uint Sid;
         string date;
         string time;
-        
     }
     event LogReceipt(uint Rid, uint Cid, uint Sid, string date, string time);
     mapping(uint => Receipt) private Receipts;
@@ -27,7 +31,7 @@ contract ReceiptSystem{
             Receipts[ReceiptCount].Sid = _Sid;
             Receipts[ReceiptCount].date = _RDate;
             Receipts[ReceiptCount].time = _Rtime;
-            emit LogReceipt(_Rid, _RDate, _Rtime);
+            emit LogReceipt(_Rid, _Cid, _Sid, _RDate, _Rtime);
     }
     function getReceipt(
         uint index
